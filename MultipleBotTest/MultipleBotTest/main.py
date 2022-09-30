@@ -1,5 +1,6 @@
 from flask import Flask, request
 import telebot
+from telebot import types
 import os
 
 app = Flask(__name__)
@@ -9,14 +10,20 @@ bot = telebot.TeleBot(TOKEN)  #connect to telegram
 
 @bot.message_handler(commands=["start"])
 def message_start(message):
-    bot.send_message(message.chat.id, "Hello, user!\nPrint number in range 2-10")
+    bot.send_message(message.chat.id, "Hello, user!\nPrint /help for info")
 
+@bot.message_handler(commands=['button'])
+def button_message(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    item1 = types.KeyboardButton("Help")
+    markup.add(item1)
+    bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
+                                      "Operations: /add , /sub, /mul, /div", reply_markup=markup)
 
-@bot.message_handler(func=lambda x: int(x) in range(2, 11))
-def message_table(message):
-    for i in range(1, 10):
-        res = int(message) * i
-        bot.send_message(message.chat.id, f"{res}")
+# @bot.message_handler(commands=["help"])
+# def message_table(message):
+#     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
+#                                       "Operations: /add , /sub, /mul, /div")
 
 
 @bot.message_handler(func=lambda x: x.text.lower().startswith("python"))
