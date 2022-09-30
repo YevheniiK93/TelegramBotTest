@@ -11,20 +11,20 @@ bot = telebot.TeleBot(TOKEN)  #connect to telegram
 
 @bot.message_handler(commands=["start"])
 def message_start(message):
-    bot.send_message(message.chat.id, "Hello, user!\nPrint /help for info")
+    bot.send_message(message.chat.id, f"{type(message)}Hello, user!\nPrint /help for info")
 
-@bot.message_handler(commands=['button'])
-def button_message(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("Help")
-    markup.add(item1)
-    bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-                                      "Operations: /add , /sub, /mul, /div", reply_markup=markup)
-
-# @bot.message_handler(commands=["help"])
-# def message_table(message):
+# @bot.message_handler(commands=['button'])
+# def button_message(message):
+#     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+#     item1 = types.KeyboardButton("Help")
+#     markup.add(item1)
 #     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-#                                       "Operations: /add , /sub, /mul, /div")
+#                                       "Operations: /add , /sub, /mul, /div", reply_markup=markup)
+
+@bot.message_handler(commands=["help"])
+def message_table(message):
+    bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
+                                      "Operations: /add , /sub, /mul, /div")
 
 
 @bot.message_handler(func=lambda x: x.text.lower().startswith("python"))
