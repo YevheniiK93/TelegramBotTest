@@ -11,7 +11,7 @@ bot = telebot.TeleBot(TOKEN)  #connect to telegram
 
 @bot.message_handler(commands=["start"])
 def message_start(message):
-    bot.send_message(message.chat.id, f"{type(message)}Hello, user!\nPrint /help for info")
+    bot.send_message(message.chat.id, f"{message.chat.id}Hello, user!\nPrint /help for info")
 
 # @bot.message_handler(commands=['button'])
 # def button_message(message):
