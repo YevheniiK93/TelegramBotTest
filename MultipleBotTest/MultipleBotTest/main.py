@@ -3,6 +3,7 @@ import telebot
 from telebot import types
 import os
 
+
 app = Flask(__name__)
 TOKEN = os.environ.get("TOKEN")  #os - server request module. environ - dict
 bot = telebot.TeleBot(TOKEN)  #connect to telegram
