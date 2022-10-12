@@ -1,6 +1,5 @@
 from flask import Flask, request
 import telebot
-from telebot import types
 import os
 
 
@@ -9,9 +8,10 @@ TOKEN = os.environ.get("TOKEN")  #os - server request module. environ - dict
 bot = telebot.TeleBot(TOKEN)  #connect to telegram
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["start", "help"])
 def message_start(message):
-    bot.send_message(message.chat.id, f"{message.chat.id}Hello, user!\nPrint /help for info")
+    bot.send_message(message.chat.id, "Hello, user!\n Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
+                                      "Operations: /add , /sub, /mul, /div")
 
 # @bot.message_handler(commands=['button'])
 # def button_message(message):
@@ -21,10 +21,14 @@ def message_start(message):
 #     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
 #                                       "Operations: /add , /sub, /mul, /div", reply_markup=markup)
 
-@bot.message_handler(commands=["help"])
-def message_table(message):
-    bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-                                      "Operations: /add , /sub, /mul, /div")
+# @bot.message_handler(commands=["help"])
+# def message_table(message):
+#     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
+#                                       "Operations: /add , /sub, /mul, /div")
+
+@bot.message_handler(func=lambda x: x.text.lower().startswith("add"))
+def message_start(message):
+    bot.send_message(message.chat.id, f"{massage.split(" ")}")
 
 
 @bot.message_handler(func=lambda x: x.text.lower().startswith("python"))
