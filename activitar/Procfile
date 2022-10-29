@@ -1,0 +1,1 @@
+web: gunicorn activitar.wsgi --log-file –

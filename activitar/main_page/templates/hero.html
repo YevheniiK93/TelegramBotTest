@@ -1,0 +1,20 @@
+{% load static %}
+<section class="hero-section">
+        <div class="hero-items owl-carousel">
+            {% for item in hero %}
+            <div class="single-hero-item set-bg" data-setbg={{ item.hero_image.url }}>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2>{{ item.hero_name }}</h2>
+                                <h1>{{ item.hero_about }}</h1>
+                                <a href="#cta" class="primary-btn">Join us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
