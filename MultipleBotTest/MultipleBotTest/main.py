@@ -10,25 +10,13 @@ bot = telebot.TeleBot(TOKEN)  #connect to telegram
 
 @bot.message_handler(commands=["start", "help"])
 def message_start(message):
-    bot.send_message(message.chat.id, "Hello, user!\n Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-                                      "Operations: /add , /sub, /mul, /div")
+    bot.send_message(message.chat.id, "Hello, user! Input expression")
 
-# @bot.message_handler(commands=['button'])
-# def button_message(message):
-#     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-#     item1 = types.KeyboardButton("Help")
-#     markup.add(item1)
-#     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-#                                       "Operations: /add , /sub, /mul, /div", reply_markup=markup)
 
-# @bot.message_handler(commands=["help"])
-# def message_table(message):
-#     bot.send_message(message.chat.id, "Print name of operation through '/' then 'space' 1st number 'space' 2nd number\n"
-#                                       "Operations: /add , /sub, /mul, /div")
-
-@bot.message_handler(func=lambda x: x.text.lower().startswith("add"))
-def message_start(message):
-    bot.send_message(message.chat.id, f"{massage.split(" ")}")
+@bot.message_handler(content_types=['text'])
+def message_text(message):
+    if message.text.lower().startswith('слава нації'):
+        bot.send_message(message.chat.id, 'Смерть ворогам!')
 
 
 @bot.message_handler(func=lambda x: x.text.lower().startswith("python"))
